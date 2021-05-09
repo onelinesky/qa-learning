@@ -1,0 +1,1562 @@
+{
+	"info": {
+		"_postman_id": "4ba25a4f-4a4b-47e6-922c-373f6ed295a5",
+		"name": "WeatherInformationAPI_FunctionalTest",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "CurrentWeatherReport_WithValidParam_ReturnValidJsonSchema",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Content-Type header is application/json\", () => {\r",
+							"  pm.expect(pm.response.headers.get('Content-Type')).to.contains('application/json');\r",
+							"});\r",
+							"\r",
+							"var schema = {\r",
+							"          \"type\":\"object\",\r",
+							"          \"additionalProperties\":false,\r",
+							"          \"required\":[\r",
+							"             \"rainfall\",\r",
+							"             \"icon\",\r",
+							"             \"iconUpdateTime\",\r",
+							"             \"uvindex\",\r",
+							"             \"updateTime\",\r",
+							"             \"warningMessage\",\r",
+							"             \"temperature\",\r",
+							"             \"humidity\"\r",
+							"          ],\r",
+							"          \"properties\":{\r",
+							"             \"lightning\":{\r",
+							"                \"type\":\"object\",\r",
+							"                \"additionalProperties\":false,\r",
+							"                \"properties\":{\r",
+							"                   \"data\":{\r",
+							"                      \"type\":\"array\",\r",
+							"                      \"items\":{\r",
+							"                        \"type\":\"object\",\r",
+							"                        \"additionalProperties\":false,\r",
+							"                        \"properties\":{\r",
+							"                           \"place\":{\r",
+							"                              \"type\":\"string\"\r",
+							"                           },\r",
+							"                           \"occur\":{\r",
+							"                              \"type\":\"string\"\r",
+							"                           }\r",
+							"                        },\r",
+							"                        \"required\":[\r",
+							"                           \"place\",\r",
+							"                           \"occur\"\r",
+							"                        ],\r",
+							"                      }\r",
+							"                   },\r",
+							"                   \"startTime\":{\r",
+							"                      \"type\":\"string\",\r",
+							"                      \"format\":\"date-time\"\r",
+							"                   },\r",
+							"                   \"endTime\":{\r",
+							"                      \"type\":\"string\",\r",
+							"                      \"format\":\"date-time\"\r",
+							"                   }\r",
+							"                },\r",
+							"                \"required\":[\r",
+							"                    \"data\",\r",
+							"                    \"endTime\",\r",
+							"                    \"startTime\"\r",
+							"                 ]\r",
+							"             },\r",
+							"             \"rainfall\":{\r",
+							"                \"type\":\"object\",\r",
+							"                \"additionalProperties\":false,\r",
+							"                \"properties\":{\r",
+							"                   \"data\":{\r",
+							"                      \"type\":\"array\",\r",
+							"                      \"items\":{\r",
+							"                        \"type\":\"object\",\r",
+							"                        \"additionalProperties\":false,\r",
+							"                        \"properties\":{\r",
+							"                           \"unit\":{\r",
+							"                              \"type\":\"string\"\r",
+							"                           },\r",
+							"                           \"place\":{\r",
+							"                              \"type\":\"string\"\r",
+							"                           },\r",
+							"                           \"max\":{\r",
+							"                              \"type\":\"integer\"\r",
+							"                           },\r",
+							"                           \"min\":{\r",
+							"                              \"type\":\"integer\"\r",
+							"                           },\r",
+							"                           \"main\":{\r",
+							"                              \"type\":\"string\",\r",
+							"                              \"enum\":[\"TRUE\",\"FALSE\"],\r",
+							"                           }\r",
+							"                        },\r",
+							"                        \"required\":[\r",
+							"                           \"main\",\r",
+							"                           \"place\",\r",
+							"                           \"unit\"\r",
+							"                        ],\r",
+							"                      }\r",
+							"                   },\r",
+							"                   \"startTime\":{\r",
+							"                      \"type\":\"string\",\r",
+							"                      \"format\":\"date-time\"\r",
+							"                   },\r",
+							"                   \"endTime\":{\r",
+							"                      \"type\":\"string\",\r",
+							"                      \"format\":\"date-time\"\r",
+							"                   }\r",
+							"                },\r",
+							"                \"required\":[\r",
+							"                   \"data\",\r",
+							"                   \"endTime\",\r",
+							"                   \"startTime\"\r",
+							"                ],\r",
+							"             },\r",
+							"             \"icon\":{\r",
+							"                \"type\":\"array\",\r",
+							"                \"items\":{\r",
+							"                   \"type\":\"integer\",\r",
+							"                   \"enum\":[50,51,52,53,54,60,61,6,63,64,65,70,71,72,73,74,75,76,77,80,81,82,83,84,85,90,91,92,93]\r",
+							"                }\r",
+							"             },\r",
+							"             \"iconUpdateTime\":{\r",
+							"                \"type\":\"string\",\r",
+							"                \"format\":\"date-time\"\r",
+							"             },\r",
+							"             \"uvindex\":{     \r",
+							"                \"type\":\"object\",\r",
+							"                \"additionalProperties\":false,\r",
+							"                \"required\":[\r",
+							"                   \"data\",\r",
+							"                   \"recordDesc\"\r",
+							"                ],\r",
+							"                \"properties\":{\r",
+							"                   \"data\":{\r",
+							"                      \"type\":\"array\",\r",
+							"                      \"items\":{         \r",
+							"                        \"type\":\"object\",\r",
+							"                        \"additionalProperties\":false,\r",
+							"                        \"required\":[\r",
+							"                           \"desc\",\r",
+							"                           \"place\",\r",
+							"                           \"value\"\r",
+							"                        ],\r",
+							"                        \"properties\":{\r",
+							"                           \"place\":{\r",
+							"                              \"type\":\"string\"\r",
+							"                           },\r",
+							"                           \"value\":{\r",
+							"                              \"type\":\"integer\"\r",
+							"                           },\r",
+							"                           \"desc\":{\r",
+							"                              \"type\":\"string\"\r",
+							"                           },\r",
+							"                           \"message\":{\r",
+							"                              \"type\":\"string\"\r",
+							"                           }\r",
+							"                        },\r",
+							"                      }\r",
+							"                   },\r",
+							"                   \"recordDesc\":{\r",
+							"                      \"type\":\"string\"\r",
+							"                   }\r",
+							"                },\r",
+							"             },\r",
+							"             \"updateTime\":{\r",
+							"                \"type\":\"string\",\r",
+							"                \"format\":\"date-time\"\r",
+							"             },\r",
+							"             \"warningMessage\":{\r",
+							"                \"type\":\"string\"\r",
+							"             },\r",
+							"             \"rainstormReminder\":{\r",
+							"                \"type\":\"string\"\r",
+							"             },\r",
+							"             \"specialWxTips\":{\r",
+							"                \"type\":\"array\",\r",
+							"                \"items\":{\r",
+							"                   \"type\":\"string\"\r",
+							"                }\r",
+							"             },\r",
+							"             \"tcmessage\":{\r",
+							"                \"type\":\"array\",\r",
+							"                \"items\":{\r",
+							"                   \"type\":\"string\"\r",
+							"                }\r",
+							"             },\r",
+							"             \"mintempFrom00To09\":{\r",
+							"                \"type\":\"string\"\r",
+							"             },\r",
+							"             \"rainfallFrom00To12\":{\r",
+							"                \"type\":\"string\"\r",
+							"             },\r",
+							"             \"rainfallLastMonth\":{\r",
+							"                \"type\":\"string\"\r",
+							"             },\r",
+							"             \"rainfallJanuaryToLastMonth\":{\r",
+							"                \"type\":\"string\"\r",
+							"             },\r",
+							"             \"temperature\":{\r",
+							"                \"type\":\"object\",\r",
+							"                \"additionalProperties\":false,\r",
+							"                \"required\":[\r",
+							"                   \"data\",\r",
+							"                   \"recordTime\"\r",
+							"                ],\r",
+							"                \"properties\":{\r",
+							"                   \"recordTime\":{\r",
+							"                      \"type\":\"string\",\r",
+							"                      \"format\":\"date-time\"\r",
+							"                   },\r",
+							"                   \"data\":{\r",
+							"                      \"type\":\"array\",\r",
+							"                      \"items\":{\r",
+							"                        \"type\":\"object\",\r",
+							"                        \"additionalProperties\":false,\r",
+							"                        \"required\":[\r",
+							"                           \"place\",\r",
+							"                           \"unit\",\r",
+							"                           \"value\"\r",
+							"                        ],\r",
+							"                        \"properties\":{\r",
+							"                           \"unit\":{\r",
+							"                              \"type\":\"string\"\r",
+							"                           },\r",
+							"                           \"value\":{\r",
+							"                              \"type\":\"integer\"\r",
+							"                           },\r",
+							"                           \"place\":{\r",
+							"                              \"type\":\"string\"\r",
+							"                           }\r",
+							"                        },\r",
+							"                      }\r",
+							"                   }\r",
+							"                },\r",
+							"             },\r",
+							"             \"humidity\":{\r",
+							"                \"type\":\"object\",\r",
+							"                \"additionalProperties\":false,\r",
+							"                \"required\":[\r",
+							"                   \"data\",\r",
+							"                   \"recordTime\"\r",
+							"                ],\r",
+							"                \"properties\":{\r",
+							"                   \"recordTime\":{\r",
+							"                      \"type\":\"string\",\r",
+							"                      \"format\":\"date-time\"\r",
+							"                   },\r",
+							"                   \"data\":{\r",
+							"                      \"type\":\"array\",\r",
+							"                      \"items\":{\r",
+							"                        \"type\":\"object\",\r",
+							"                        \"additionalProperties\":false,\r",
+							"                        \"required\":[\r",
+							"                           \"place\",\r",
+							"                           \"unit\",\r",
+							"                           \"value\"\r",
+							"                        ],\r",
+							"                        \"properties\":{\r",
+							"                           \"unit\":{\r",
+							"                              \"type\":\"string\"\r",
+							"                           },\r",
+							"                           \"value\":{\r",
+							"                              \"type\":\"integer\"\r",
+							"                           },\r",
+							"                           \"place\":{\r",
+							"                              \"type\":\"string\"\r",
+							"                           }\r",
+							"                        },\r",
+							"                      }\r",
+							"                   }\r",
+							"                },\r",
+							"             }\r",
+							"          }\r",
+							"       };\r",
+							"\r",
+							"pm.test(\"Validate response json schema\", () => {\r",
+							"    pm.response.to.have.jsonSchema(schema)\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/weatherAPI/opendata/weather.php?dataType=rhrread&lang=en",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"weatherAPI",
+						"opendata",
+						"weather.php"
+					],
+					"query": [
+						{
+							"key": "dataType",
+							"value": "rhrread",
+							"description": "(Required) Weather information data type"
+						},
+						{
+							"key": "lang",
+							"value": "en",
+							"description": "Language of data content"
+						}
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "English Data Sample",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/weatherAPI/opendata/weather.php?dataType=rhrread",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"weatherAPI",
+								"opendata",
+								"weather.php"
+							],
+							"query": [
+								{
+									"key": "dataType",
+									"value": "rhrread",
+									"description": "(Required) Weather information data type"
+								},
+								{
+									"key": "lang",
+									"value": "en",
+									"description": "Language of data content",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Date",
+							"value": "Sat, 08 May 2021 14:07:47 GMT"
+						},
+						{
+							"key": "Server",
+							"value": "Apache"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Strict-Transport-Security",
+							"value": "max-age=63072000"
+						},
+						{
+							"key": "Referrer-Policy",
+							"value": "no-referrer-when-downgrade"
+						},
+						{
+							"key": "X-Frame-Options",
+							"value": "SAMEORIGIN"
+						},
+						{
+							"key": "X-Frame-Options",
+							"value": "SAMEORIGIN"
+						},
+						{
+							"key": "Content-Security-Policy",
+							"value": "default-src 'self'; frame-ancestors 'self' *;"
+						},
+						{
+							"key": "Content-Security-Policy",
+							"value": "frame-ancestors 'self' gowise2.weather.gov.hk gowise2.hko.ccgo.hksarg kids.weather.gov.hk *.weather.gov.hk;"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=10, max=100"
+						},
+						{
+							"key": "Connection",
+							"value": "Keep-Alive"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"rainfall\": {\n        \"data\": [\n            {\n                \"unit\": \"mm\",\n                \"place\": \"Central &amp; Western District\",\n                \"max\": 0,\n                \"main\": \"FALSE\"\n            },\n            {\n                \"unit\": \"mm\",\n                \"place\": \"Eastern District\",\n                \"max\": 0,\n                \"main\": \"FALSE\"\n            },\n            {\n                \"unit\": \"mm\",\n                \"place\": \"Kwai Tsing\",\n                \"max\": 0,\n                \"main\": \"FALSE\"\n            },\n            {\n                \"unit\": \"mm\",\n                \"place\": \"Islands District\",\n                \"max\": 0,\n                \"main\": \"FALSE\"\n            },\n            {\n                \"unit\": \"mm\",\n                \"place\": \"North District\",\n                \"max\": 0,\n                \"main\": \"FALSE\"\n            },\n            {\n                \"unit\": \"mm\",\n                \"place\": \"Sai Kung\",\n                \"max\": 0,\n                \"main\": \"FALSE\"\n            },\n            {\n                \"unit\": \"mm\",\n                \"place\": \"Sha Tin\",\n                \"max\": 0,\n                \"main\": \"FALSE\"\n            },\n            {\n                \"unit\": \"mm\",\n                \"place\": \"Southern District\",\n                \"max\": 0,\n                \"main\": \"FALSE\"\n            },\n            {\n                \"unit\": \"mm\",\n                \"place\": \"Tai Po\",\n                \"max\": 0,\n                \"main\": \"FALSE\"\n            },\n            {\n                \"unit\": \"mm\",\n                \"place\": \"Tsuen Wan\",\n                \"max\": 0,\n                \"main\": \"FALSE\"\n            },\n            {\n                \"unit\": \"mm\",\n                \"place\": \"Tuen Mun\",\n                \"max\": 0,\n                \"main\": \"FALSE\"\n            },\n            {\n                \"unit\": \"mm\",\n                \"place\": \"Wan Chai\",\n                \"max\": 0,\n                \"main\": \"FALSE\"\n            },\n            {\n                \"unit\": \"mm\",\n                \"place\": \"Yuen Long\",\n                \"max\": 0,\n                \"main\": \"FALSE\"\n            },\n            {\n                \"unit\": \"mm\",\n                \"place\": \"Yau Tsim Mong\",\n                \"max\": 0,\n                \"main\": \"FALSE\"\n            },\n            {\n                \"unit\": \"mm\",\n                \"place\": \"Sham Shui Po\",\n                \"max\": 0,\n                \"main\": \"FALSE\"\n            },\n            {\n                \"unit\": \"mm\",\n                \"place\": \"Kowloon City\",\n                \"max\": 0,\n                \"main\": \"FALSE\"\n            },\n            {\n                \"unit\": \"mm\",\n                \"place\": \"Wong Tai Sin\",\n                \"max\": 0,\n                \"main\": \"FALSE\"\n            },\n            {\n                \"unit\": \"mm\",\n                \"place\": \"Kwun Tong\",\n                \"max\": 0,\n                \"main\": \"FALSE\"\n            }\n        ],\n        \"startTime\": \"2021-05-08T20:45:00+08:00\",\n        \"endTime\": \"2021-05-08T21:45:00+08:00\"\n    },\n    \"icon\": [\n        77\n    ],\n    \"iconUpdateTime\": \"2021-05-08T18:00:00+08:00\",\n    \"uvindex\": \"\",\n    \"updateTime\": \"2021-05-08T22:02:00+08:00\",\n    \"temperature\": {\n        \"data\": [\n            {\n                \"place\": \"King's Park\",\n                \"value\": 27,\n                \"unit\": \"C\"\n            },\n            {\n                \"place\": \"Hong Kong Observatory\",\n                \"value\": 28,\n                \"unit\": \"C\"\n            },\n            {\n                \"place\": \"Wong Chuk Hang\",\n                \"value\": 27,\n                \"unit\": \"C\"\n            },\n            {\n                \"place\": \"Ta Kwu Ling\",\n                \"value\": 26,\n                \"unit\": \"C\"\n            },\n            {\n                \"place\": \"Lau Fau Shan\",\n                \"value\": 27,\n                \"unit\": \"C\"\n            },\n            {\n                \"place\": \"Tai Po\",\n                \"value\": 27,\n                \"unit\": \"C\"\n            },\n            {\n                \"place\": \"Sha Tin\",\n                \"value\": 27,\n                \"unit\": \"C\"\n            },\n            {\n                \"place\": \"Tuen Mun\",\n                \"value\": 27,\n                \"unit\": \"C\"\n            },\n            {\n                \"place\": \"Tseung Kwan O\",\n                \"value\": 27,\n                \"unit\": \"C\"\n            },\n            {\n                \"place\": \"Sai Kung\",\n                \"value\": 27,\n                \"unit\": \"C\"\n            },\n            {\n                \"place\": \"Cheung Chau\",\n                \"value\": 26,\n                \"unit\": \"C\"\n            },\n            {\n                \"place\": \"Chek Lap Kok\",\n                \"value\": 28,\n                \"unit\": \"C\"\n            },\n            {\n                \"place\": \"Tsing Yi\",\n                \"value\": 27,\n                \"unit\": \"C\"\n            },\n            {\n                \"place\": \"Shek Kong\",\n                \"value\": 27,\n                \"unit\": \"C\"\n            },\n            {\n                \"place\": \"Tsuen Wan Ho Koon\",\n                \"value\": 26,\n                \"unit\": \"C\"\n            },\n            {\n                \"place\": \"Tsuen Wan Shing Mun Valley\",\n                \"value\": 27,\n                \"unit\": \"C\"\n            },\n            {\n                \"place\": \"Hong Kong Park\",\n                \"value\": 27,\n                \"unit\": \"C\"\n            },\n            {\n                \"place\": \"Shau Kei Wan\",\n                \"value\": 27,\n                \"unit\": \"C\"\n            },\n            {\n                \"place\": \"Kowloon City\",\n                \"value\": 27,\n                \"unit\": \"C\"\n            },\n            {\n                \"place\": \"Happy Valley\",\n                \"value\": 27,\n                \"unit\": \"C\"\n            },\n            {\n                \"place\": \"Wong Tai Sin\",\n                \"value\": 27,\n                \"unit\": \"C\"\n            },\n            {\n                \"place\": \"Stanley\",\n                \"value\": 27,\n                \"unit\": \"C\"\n            },\n            {\n                \"place\": \"Kwun Tong\",\n                \"value\": 27,\n                \"unit\": \"C\"\n            },\n            {\n                \"place\": \"Sham Shui Po\",\n                \"value\": 27,\n                \"unit\": \"C\"\n            },\n            {\n                \"place\": \"Kai Tak Runway Park\",\n                \"value\": 27,\n                \"unit\": \"C\"\n            },\n            {\n                \"place\": \"Yuen Long Park\",\n                \"value\": 27,\n                \"unit\": \"C\"\n            },\n            {\n                \"place\": \"Tai Mei Tuk\",\n                \"value\": 27,\n                \"unit\": \"C\"\n            }\n        ],\n        \"recordTime\": \"2021-05-08T22:00:00+08:00\"\n    },\n    \"warningMessage\": \"\",\n    \"mintempFrom00To09\": \"\",\n    \"rainfallFrom00To12\": \"\",\n    \"rainfallLastMonth\": \"\",\n    \"rainfallJanuaryToLastMonth\": \"\",\n    \"tcmessage\": \"\",\n    \"humidity\": {\n        \"recordTime\": \"2021-05-08T22:00:00+08:00\",\n        \"data\": [\n            {\n                \"unit\": \"percent\",\n                \"value\": 82,\n                \"place\": \"Hong Kong Observatory\"\n            }\n        ]\n    }\n}"
+				}
+			]
+		},
+		{
+			"name": "CurrentWeatherReport_withoutLangParam_ReturnEnData",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Content-Type header is application/json\", () => {\r",
+							"  pm.expect(pm.response.headers.get('Content-Type')).to.contains('application/json');\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Body contains only en data\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"Eastern District\");\r",
+							"    pm.expect(pm.response.text()).not.include(\"東區\");\r",
+							"    pm.expect(pm.response.text()).not.include(\"东区\");\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/weatherAPI/opendata/weather.php?dataType=rhrread",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"weatherAPI",
+						"opendata",
+						"weather.php"
+					],
+					"query": [
+						{
+							"key": "dataType",
+							"value": "rhrread",
+							"description": "(Required) Weather information data type"
+						},
+						{
+							"key": "lang",
+							"value": "en",
+							"description": "Language of data content",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "English Data Sample",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/weatherAPI/opendata/weather.php?dataType=rhrread",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"weatherAPI",
+								"opendata",
+								"weather.php"
+							],
+							"query": [
+								{
+									"key": "dataType",
+									"value": "rhrread",
+									"description": "(Required) Weather information data type"
+								},
+								{
+									"key": "lang",
+									"value": "en",
+									"description": "Language of data content",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Date",
+							"value": "Sat, 08 May 2021 14:07:47 GMT"
+						},
+						{
+							"key": "Server",
+							"value": "Apache"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Strict-Transport-Security",
+							"value": "max-age=63072000"
+						},
+						{
+							"key": "Referrer-Policy",
+							"value": "no-referrer-when-downgrade"
+						},
+						{
+							"key": "X-Frame-Options",
+							"value": "SAMEORIGIN"
+						},
+						{
+							"key": "X-Frame-Options",
+							"value": "SAMEORIGIN"
+						},
+						{
+							"key": "Content-Security-Policy",
+							"value": "default-src 'self'; frame-ancestors 'self' *;"
+						},
+						{
+							"key": "Content-Security-Policy",
+							"value": "frame-ancestors 'self' gowise2.weather.gov.hk gowise2.hko.ccgo.hksarg kids.weather.gov.hk *.weather.gov.hk;"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=10, max=100"
+						},
+						{
+							"key": "Connection",
+							"value": "Keep-Alive"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"rainfall\": {\n        \"data\": [\n            {\n                \"unit\": \"mm\",\n                \"place\": \"Central &amp; Western District\",\n                \"max\": 0,\n                \"main\": \"FALSE\"\n            },\n            {\n                \"unit\": \"mm\",\n                \"place\": \"Eastern District\",\n                \"max\": 0,\n                \"main\": \"FALSE\"\n            },\n            {\n                \"unit\": \"mm\",\n                \"place\": \"Kwai Tsing\",\n                \"max\": 0,\n                \"main\": \"FALSE\"\n            },\n            {\n                \"unit\": \"mm\",\n                \"place\": \"Islands District\",\n                \"max\": 0,\n                \"main\": \"FALSE\"\n            },\n            {\n                \"unit\": \"mm\",\n                \"place\": \"North District\",\n                \"max\": 0,\n                \"main\": \"FALSE\"\n            },\n            {\n                \"unit\": \"mm\",\n                \"place\": \"Sai Kung\",\n                \"max\": 0,\n                \"main\": \"FALSE\"\n            },\n            {\n                \"unit\": \"mm\",\n                \"place\": \"Sha Tin\",\n                \"max\": 0,\n                \"main\": \"FALSE\"\n            },\n            {\n                \"unit\": \"mm\",\n                \"place\": \"Southern District\",\n                \"max\": 0,\n                \"main\": \"FALSE\"\n            },\n            {\n                \"unit\": \"mm\",\n                \"place\": \"Tai Po\",\n                \"max\": 0,\n                \"main\": \"FALSE\"\n            },\n            {\n                \"unit\": \"mm\",\n                \"place\": \"Tsuen Wan\",\n                \"max\": 0,\n                \"main\": \"FALSE\"\n            },\n            {\n                \"unit\": \"mm\",\n                \"place\": \"Tuen Mun\",\n                \"max\": 0,\n                \"main\": \"FALSE\"\n            },\n            {\n                \"unit\": \"mm\",\n                \"place\": \"Wan Chai\",\n                \"max\": 0,\n                \"main\": \"FALSE\"\n            },\n            {\n                \"unit\": \"mm\",\n                \"place\": \"Yuen Long\",\n                \"max\": 0,\n                \"main\": \"FALSE\"\n            },\n            {\n                \"unit\": \"mm\",\n                \"place\": \"Yau Tsim Mong\",\n                \"max\": 0,\n                \"main\": \"FALSE\"\n            },\n            {\n                \"unit\": \"mm\",\n                \"place\": \"Sham Shui Po\",\n                \"max\": 0,\n                \"main\": \"FALSE\"\n            },\n            {\n                \"unit\": \"mm\",\n                \"place\": \"Kowloon City\",\n                \"max\": 0,\n                \"main\": \"FALSE\"\n            },\n            {\n                \"unit\": \"mm\",\n                \"place\": \"Wong Tai Sin\",\n                \"max\": 0,\n                \"main\": \"FALSE\"\n            },\n            {\n                \"unit\": \"mm\",\n                \"place\": \"Kwun Tong\",\n                \"max\": 0,\n                \"main\": \"FALSE\"\n            }\n        ],\n        \"startTime\": \"2021-05-08T20:45:00+08:00\",\n        \"endTime\": \"2021-05-08T21:45:00+08:00\"\n    },\n    \"icon\": [\n        77\n    ],\n    \"iconUpdateTime\": \"2021-05-08T18:00:00+08:00\",\n    \"uvindex\": \"\",\n    \"updateTime\": \"2021-05-08T22:02:00+08:00\",\n    \"temperature\": {\n        \"data\": [\n            {\n                \"place\": \"King's Park\",\n                \"value\": 27,\n                \"unit\": \"C\"\n            },\n            {\n                \"place\": \"Hong Kong Observatory\",\n                \"value\": 28,\n                \"unit\": \"C\"\n            },\n            {\n                \"place\": \"Wong Chuk Hang\",\n                \"value\": 27,\n                \"unit\": \"C\"\n            },\n            {\n                \"place\": \"Ta Kwu Ling\",\n                \"value\": 26,\n                \"unit\": \"C\"\n            },\n            {\n                \"place\": \"Lau Fau Shan\",\n                \"value\": 27,\n                \"unit\": \"C\"\n            },\n            {\n                \"place\": \"Tai Po\",\n                \"value\": 27,\n                \"unit\": \"C\"\n            },\n            {\n                \"place\": \"Sha Tin\",\n                \"value\": 27,\n                \"unit\": \"C\"\n            },\n            {\n                \"place\": \"Tuen Mun\",\n                \"value\": 27,\n                \"unit\": \"C\"\n            },\n            {\n                \"place\": \"Tseung Kwan O\",\n                \"value\": 27,\n                \"unit\": \"C\"\n            },\n            {\n                \"place\": \"Sai Kung\",\n                \"value\": 27,\n                \"unit\": \"C\"\n            },\n            {\n                \"place\": \"Cheung Chau\",\n                \"value\": 26,\n                \"unit\": \"C\"\n            },\n            {\n                \"place\": \"Chek Lap Kok\",\n                \"value\": 28,\n                \"unit\": \"C\"\n            },\n            {\n                \"place\": \"Tsing Yi\",\n                \"value\": 27,\n                \"unit\": \"C\"\n            },\n            {\n                \"place\": \"Shek Kong\",\n                \"value\": 27,\n                \"unit\": \"C\"\n            },\n            {\n                \"place\": \"Tsuen Wan Ho Koon\",\n                \"value\": 26,\n                \"unit\": \"C\"\n            },\n            {\n                \"place\": \"Tsuen Wan Shing Mun Valley\",\n                \"value\": 27,\n                \"unit\": \"C\"\n            },\n            {\n                \"place\": \"Hong Kong Park\",\n                \"value\": 27,\n                \"unit\": \"C\"\n            },\n            {\n                \"place\": \"Shau Kei Wan\",\n                \"value\": 27,\n                \"unit\": \"C\"\n            },\n            {\n                \"place\": \"Kowloon City\",\n                \"value\": 27,\n                \"unit\": \"C\"\n            },\n            {\n                \"place\": \"Happy Valley\",\n                \"value\": 27,\n                \"unit\": \"C\"\n            },\n            {\n                \"place\": \"Wong Tai Sin\",\n                \"value\": 27,\n                \"unit\": \"C\"\n            },\n            {\n                \"place\": \"Stanley\",\n                \"value\": 27,\n                \"unit\": \"C\"\n            },\n            {\n                \"place\": \"Kwun Tong\",\n                \"value\": 27,\n                \"unit\": \"C\"\n            },\n            {\n                \"place\": \"Sham Shui Po\",\n                \"value\": 27,\n                \"unit\": \"C\"\n            },\n            {\n                \"place\": \"Kai Tak Runway Park\",\n                \"value\": 27,\n                \"unit\": \"C\"\n            },\n            {\n                \"place\": \"Yuen Long Park\",\n                \"value\": 27,\n                \"unit\": \"C\"\n            },\n            {\n                \"place\": \"Tai Mei Tuk\",\n                \"value\": 27,\n                \"unit\": \"C\"\n            }\n        ],\n        \"recordTime\": \"2021-05-08T22:00:00+08:00\"\n    },\n    \"warningMessage\": \"\",\n    \"mintempFrom00To09\": \"\",\n    \"rainfallFrom00To12\": \"\",\n    \"rainfallLastMonth\": \"\",\n    \"rainfallJanuaryToLastMonth\": \"\",\n    \"tcmessage\": \"\",\n    \"humidity\": {\n        \"recordTime\": \"2021-05-08T22:00:00+08:00\",\n        \"data\": [\n            {\n                \"unit\": \"percent\",\n                \"value\": 82,\n                \"place\": \"Hong Kong Observatory\"\n            }\n        ]\n    }\n}"
+				}
+			]
+		},
+		{
+			"name": "CurrentWeatherReport_WithLangParamEn_ReturnEnData",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Content-Type header is application/json\", () => {\r",
+							"  pm.expect(pm.response.headers.get('Content-Type')).to.contains('application/json');\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Body contains only en data\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"Eastern District\");\r",
+							"    pm.expect(pm.response.text()).not.include(\"東區\");\r",
+							"    pm.expect(pm.response.text()).not.include(\"东区\");\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/weatherAPI/opendata/weather.php?dataType=rhrread&lang=en",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"weatherAPI",
+						"opendata",
+						"weather.php"
+					],
+					"query": [
+						{
+							"key": "dataType",
+							"value": "rhrread",
+							"description": "(Required) Weather information data type"
+						},
+						{
+							"key": "lang",
+							"value": "en",
+							"description": "Language of data content"
+						}
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "English Data Sample",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/weatherAPI/opendata/weather.php?dataType=rhrread",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"weatherAPI",
+								"opendata",
+								"weather.php"
+							],
+							"query": [
+								{
+									"key": "dataType",
+									"value": "rhrread",
+									"description": "(Required) Weather information data type"
+								},
+								{
+									"key": "lang",
+									"value": "en",
+									"description": "Language of data content",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Date",
+							"value": "Sat, 08 May 2021 14:07:47 GMT"
+						},
+						{
+							"key": "Server",
+							"value": "Apache"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Strict-Transport-Security",
+							"value": "max-age=63072000"
+						},
+						{
+							"key": "Referrer-Policy",
+							"value": "no-referrer-when-downgrade"
+						},
+						{
+							"key": "X-Frame-Options",
+							"value": "SAMEORIGIN"
+						},
+						{
+							"key": "X-Frame-Options",
+							"value": "SAMEORIGIN"
+						},
+						{
+							"key": "Content-Security-Policy",
+							"value": "default-src 'self'; frame-ancestors 'self' *;"
+						},
+						{
+							"key": "Content-Security-Policy",
+							"value": "frame-ancestors 'self' gowise2.weather.gov.hk gowise2.hko.ccgo.hksarg kids.weather.gov.hk *.weather.gov.hk;"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=10, max=100"
+						},
+						{
+							"key": "Connection",
+							"value": "Keep-Alive"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"rainfall\": {\n        \"data\": [\n            {\n                \"unit\": \"mm\",\n                \"place\": \"Central &amp; Western District\",\n                \"max\": 0,\n                \"main\": \"FALSE\"\n            },\n            {\n                \"unit\": \"mm\",\n                \"place\": \"Eastern District\",\n                \"max\": 0,\n                \"main\": \"FALSE\"\n            },\n            {\n                \"unit\": \"mm\",\n                \"place\": \"Kwai Tsing\",\n                \"max\": 0,\n                \"main\": \"FALSE\"\n            },\n            {\n                \"unit\": \"mm\",\n                \"place\": \"Islands District\",\n                \"max\": 0,\n                \"main\": \"FALSE\"\n            },\n            {\n                \"unit\": \"mm\",\n                \"place\": \"North District\",\n                \"max\": 0,\n                \"main\": \"FALSE\"\n            },\n            {\n                \"unit\": \"mm\",\n                \"place\": \"Sai Kung\",\n                \"max\": 0,\n                \"main\": \"FALSE\"\n            },\n            {\n                \"unit\": \"mm\",\n                \"place\": \"Sha Tin\",\n                \"max\": 0,\n                \"main\": \"FALSE\"\n            },\n            {\n                \"unit\": \"mm\",\n                \"place\": \"Southern District\",\n                \"max\": 0,\n                \"main\": \"FALSE\"\n            },\n            {\n                \"unit\": \"mm\",\n                \"place\": \"Tai Po\",\n                \"max\": 0,\n                \"main\": \"FALSE\"\n            },\n            {\n                \"unit\": \"mm\",\n                \"place\": \"Tsuen Wan\",\n                \"max\": 0,\n                \"main\": \"FALSE\"\n            },\n            {\n                \"unit\": \"mm\",\n                \"place\": \"Tuen Mun\",\n                \"max\": 0,\n                \"main\": \"FALSE\"\n            },\n            {\n                \"unit\": \"mm\",\n                \"place\": \"Wan Chai\",\n                \"max\": 0,\n                \"main\": \"FALSE\"\n            },\n            {\n                \"unit\": \"mm\",\n                \"place\": \"Yuen Long\",\n                \"max\": 0,\n                \"main\": \"FALSE\"\n            },\n            {\n                \"unit\": \"mm\",\n                \"place\": \"Yau Tsim Mong\",\n                \"max\": 0,\n                \"main\": \"FALSE\"\n            },\n            {\n                \"unit\": \"mm\",\n                \"place\": \"Sham Shui Po\",\n                \"max\": 0,\n                \"main\": \"FALSE\"\n            },\n            {\n                \"unit\": \"mm\",\n                \"place\": \"Kowloon City\",\n                \"max\": 0,\n                \"main\": \"FALSE\"\n            },\n            {\n                \"unit\": \"mm\",\n                \"place\": \"Wong Tai Sin\",\n                \"max\": 0,\n                \"main\": \"FALSE\"\n            },\n            {\n                \"unit\": \"mm\",\n                \"place\": \"Kwun Tong\",\n                \"max\": 0,\n                \"main\": \"FALSE\"\n            }\n        ],\n        \"startTime\": \"2021-05-08T20:45:00+08:00\",\n        \"endTime\": \"2021-05-08T21:45:00+08:00\"\n    },\n    \"icon\": [\n        77\n    ],\n    \"iconUpdateTime\": \"2021-05-08T18:00:00+08:00\",\n    \"uvindex\": \"\",\n    \"updateTime\": \"2021-05-08T22:02:00+08:00\",\n    \"temperature\": {\n        \"data\": [\n            {\n                \"place\": \"King's Park\",\n                \"value\": 27,\n                \"unit\": \"C\"\n            },\n            {\n                \"place\": \"Hong Kong Observatory\",\n                \"value\": 28,\n                \"unit\": \"C\"\n            },\n            {\n                \"place\": \"Wong Chuk Hang\",\n                \"value\": 27,\n                \"unit\": \"C\"\n            },\n            {\n                \"place\": \"Ta Kwu Ling\",\n                \"value\": 26,\n                \"unit\": \"C\"\n            },\n            {\n                \"place\": \"Lau Fau Shan\",\n                \"value\": 27,\n                \"unit\": \"C\"\n            },\n            {\n                \"place\": \"Tai Po\",\n                \"value\": 27,\n                \"unit\": \"C\"\n            },\n            {\n                \"place\": \"Sha Tin\",\n                \"value\": 27,\n                \"unit\": \"C\"\n            },\n            {\n                \"place\": \"Tuen Mun\",\n                \"value\": 27,\n                \"unit\": \"C\"\n            },\n            {\n                \"place\": \"Tseung Kwan O\",\n                \"value\": 27,\n                \"unit\": \"C\"\n            },\n            {\n                \"place\": \"Sai Kung\",\n                \"value\": 27,\n                \"unit\": \"C\"\n            },\n            {\n                \"place\": \"Cheung Chau\",\n                \"value\": 26,\n                \"unit\": \"C\"\n            },\n            {\n                \"place\": \"Chek Lap Kok\",\n                \"value\": 28,\n                \"unit\": \"C\"\n            },\n            {\n                \"place\": \"Tsing Yi\",\n                \"value\": 27,\n                \"unit\": \"C\"\n            },\n            {\n                \"place\": \"Shek Kong\",\n                \"value\": 27,\n                \"unit\": \"C\"\n            },\n            {\n                \"place\": \"Tsuen Wan Ho Koon\",\n                \"value\": 26,\n                \"unit\": \"C\"\n            },\n            {\n                \"place\": \"Tsuen Wan Shing Mun Valley\",\n                \"value\": 27,\n                \"unit\": \"C\"\n            },\n            {\n                \"place\": \"Hong Kong Park\",\n                \"value\": 27,\n                \"unit\": \"C\"\n            },\n            {\n                \"place\": \"Shau Kei Wan\",\n                \"value\": 27,\n                \"unit\": \"C\"\n            },\n            {\n                \"place\": \"Kowloon City\",\n                \"value\": 27,\n                \"unit\": \"C\"\n            },\n            {\n                \"place\": \"Happy Valley\",\n                \"value\": 27,\n                \"unit\": \"C\"\n            },\n            {\n                \"place\": \"Wong Tai Sin\",\n                \"value\": 27,\n                \"unit\": \"C\"\n            },\n            {\n                \"place\": \"Stanley\",\n                \"value\": 27,\n                \"unit\": \"C\"\n            },\n            {\n                \"place\": \"Kwun Tong\",\n                \"value\": 27,\n                \"unit\": \"C\"\n            },\n            {\n                \"place\": \"Sham Shui Po\",\n                \"value\": 27,\n                \"unit\": \"C\"\n            },\n            {\n                \"place\": \"Kai Tak Runway Park\",\n                \"value\": 27,\n                \"unit\": \"C\"\n            },\n            {\n                \"place\": \"Yuen Long Park\",\n                \"value\": 27,\n                \"unit\": \"C\"\n            },\n            {\n                \"place\": \"Tai Mei Tuk\",\n                \"value\": 27,\n                \"unit\": \"C\"\n            }\n        ],\n        \"recordTime\": \"2021-05-08T22:00:00+08:00\"\n    },\n    \"warningMessage\": \"\",\n    \"mintempFrom00To09\": \"\",\n    \"rainfallFrom00To12\": \"\",\n    \"rainfallLastMonth\": \"\",\n    \"rainfallJanuaryToLastMonth\": \"\",\n    \"tcmessage\": \"\",\n    \"humidity\": {\n        \"recordTime\": \"2021-05-08T22:00:00+08:00\",\n        \"data\": [\n            {\n                \"unit\": \"percent\",\n                \"value\": 82,\n                \"place\": \"Hong Kong Observatory\"\n            }\n        ]\n    }\n}"
+				}
+			]
+		},
+		{
+			"name": "CurrentWeatherReport_WithLangParamTc_ReturnTcData",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Content-Type header is application/json\", () => {\r",
+							"  pm.expect(pm.response.headers.get('Content-Type')).to.contains('application/json');\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Body contains only tc data\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"東區\");\r",
+							"    pm.expect(pm.response.text()).not.include(\"东区\");\r",
+							"    pm.expect(pm.response.text()).not.include(\"Eastern District\");\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/weatherAPI/opendata/weather.php?dataType=rhrread&lang=tc",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"weatherAPI",
+						"opendata",
+						"weather.php"
+					],
+					"query": [
+						{
+							"key": "dataType",
+							"value": "rhrread",
+							"description": "(Required) Weather information data type"
+						},
+						{
+							"key": "lang",
+							"value": "tc",
+							"description": "Language of data content"
+						}
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Traditional Chinese Data Sample",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/weatherAPI/opendata/weather.php?dataType=rhrread&lang=tc",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"weatherAPI",
+								"opendata",
+								"weather.php"
+							],
+							"query": [
+								{
+									"key": "dataType",
+									"value": "rhrread",
+									"description": "(Required) Weather information data type"
+								},
+								{
+									"key": "lang",
+									"value": "tc",
+									"description": "Language of data content"
+								}
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Date",
+							"value": "Sat, 08 May 2021 14:46:27 GMT"
+						},
+						{
+							"key": "Server",
+							"value": "Apache"
+						},
+						{
+							"key": "Strict-Transport-Security",
+							"value": "max-age=31536000; includeSubDomains; preload"
+						},
+						{
+							"key": "Referrer-Policy",
+							"value": "no-referrer-when-downgrade"
+						},
+						{
+							"key": "X-Frame-Options",
+							"value": "SAMEORIGIN"
+						},
+						{
+							"key": "X-Frame-Options",
+							"value": "SAMEORIGIN"
+						},
+						{
+							"key": "Content-Security-Policy",
+							"value": "default-src 'self'; frame-ancestors 'self' *;"
+						},
+						{
+							"key": "Content-Security-Policy",
+							"value": "frame-ancestors 'self';"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Content-Length",
+							"value": "2705"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=10, max=100"
+						},
+						{
+							"key": "Connection",
+							"value": "Keep-Alive"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"rainfall\": {\n        \"data\": [\n            {\n                \"unit\": \"mm\",\n                \"place\": \"中西區\",\n                \"max\": 0,\n                \"main\": \"FALSE\"\n            },\n            {\n                \"unit\": \"mm\",\n                \"place\": \"東區\",\n                \"max\": 0,\n                \"main\": \"FALSE\"\n            },\n            {\n                \"unit\": \"mm\",\n                \"place\": \"葵青\",\n                \"max\": 0,\n                \"main\": \"FALSE\"\n            },\n            {\n                \"unit\": \"mm\",\n                \"place\": \"離島區\",\n                \"max\": 0,\n                \"main\": \"FALSE\"\n            },\n            {\n                \"unit\": \"mm\",\n                \"place\": \"北區\",\n                \"max\": 0,\n                \"main\": \"FALSE\"\n            },\n            {\n                \"unit\": \"mm\",\n                \"place\": \"西貢\",\n                \"max\": 0,\n                \"main\": \"FALSE\"\n            },\n            {\n                \"unit\": \"mm\",\n                \"place\": \"沙田\",\n                \"max\": 0,\n                \"main\": \"FALSE\"\n            },\n            {\n                \"unit\": \"mm\",\n                \"place\": \"南區\",\n                \"max\": 0,\n                \"main\": \"FALSE\"\n            },\n            {\n                \"unit\": \"mm\",\n                \"place\": \"大埔\",\n                \"max\": 0,\n                \"main\": \"FALSE\"\n            },\n            {\n                \"unit\": \"mm\",\n                \"place\": \"荃灣\",\n                \"max\": 0,\n                \"main\": \"FALSE\"\n            },\n            {\n                \"unit\": \"mm\",\n                \"place\": \"屯門\",\n                \"max\": 0,\n                \"main\": \"FALSE\"\n            },\n            {\n                \"unit\": \"mm\",\n                \"place\": \"灣仔\",\n                \"max\": 0,\n                \"main\": \"FALSE\"\n            },\n            {\n                \"unit\": \"mm\",\n                \"place\": \"元朗\",\n                \"max\": 0,\n                \"main\": \"FALSE\"\n            },\n            {\n                \"unit\": \"mm\",\n                \"place\": \"油尖旺\",\n                \"max\": 0,\n                \"main\": \"FALSE\"\n            },\n            {\n                \"unit\": \"mm\",\n                \"place\": \"深水埗\",\n                \"max\": 0,\n                \"main\": \"\"\n            },\n            {\n                \"unit\": \"mm\",\n                \"place\": \"九龍城\",\n                \"max\": 0,\n                \"main\": \"\"\n            },\n            {\n                \"unit\": \"mm\",\n                \"place\": \"黃大仙\",\n                \"max\": 0,\n                \"main\": \"FALSE\"\n            },\n            {\n                \"unit\": \"mm\",\n                \"place\": \"觀塘\",\n                \"max\": 0,\n                \"main\": \"FALSE\"\n            }\n        ],\n        \"startTime\": \"2021-05-08T20:45:00+08:00\",\n        \"endTime\": \"2021-05-08T21:45:00+08:00\"\n    },\n    \"warningMessage\": \"\",\n    \"icon\": [\n        77\n    ],\n    \"iconUpdateTime\": \"2021-05-08T18:00:00+08:00\",\n    \"uvindex\": \"\",\n    \"updateTime\": \"2021-05-08T22:02:00+08:00\",\n    \"temperature\": {\n        \"data\": [\n            {\n                \"place\": \"京士柏\",\n                \"value\": 27,\n                \"unit\": \"C\"\n            },\n            {\n                \"place\": \"香港天文台\",\n                \"value\": 28,\n                \"unit\": \"C\"\n            },\n            {\n                \"place\": \"黃竹坑\",\n                \"value\": 27,\n                \"unit\": \"C\"\n            },\n            {\n                \"place\": \"打鼓嶺\",\n                \"value\": 26,\n                \"unit\": \"C\"\n            },\n            {\n                \"place\": \"流浮山\",\n                \"value\": 27,\n                \"unit\": \"C\"\n            },\n            {\n                \"place\": \"大埔\",\n                \"value\": 27,\n                \"unit\": \"C\"\n            },\n            {\n                \"place\": \"沙田\",\n                \"value\": 27,\n                \"unit\": \"C\"\n            },\n            {\n                \"place\": \"屯門\",\n                \"value\": 27,\n                \"unit\": \"C\"\n            },\n            {\n                \"place\": \"將軍澳\",\n                \"value\": 27,\n                \"unit\": \"C\"\n            },\n            {\n                \"place\": \"西貢\",\n                \"value\": 27,\n                \"unit\": \"C\"\n            },\n            {\n                \"place\": \"長洲\",\n                \"value\": 26,\n                \"unit\": \"C\"\n            },\n            {\n                \"place\": \"赤鱲角\",\n                \"value\": 28,\n                \"unit\": \"C\"\n            },\n            {\n                \"place\": \"青衣\",\n                \"value\": 27,\n                \"unit\": \"C\"\n            },\n            {\n                \"place\": \"石崗\",\n                \"value\": 27,\n                \"unit\": \"C\"\n            },\n            {\n                \"place\": \"荃灣可觀\",\n                \"value\": 26,\n                \"unit\": \"C\"\n            },\n            {\n                \"place\": \"荃灣城門谷\",\n                \"value\": 27,\n                \"unit\": \"C\"\n            },\n            {\n                \"place\": \"香港公園\",\n                \"value\": 27,\n                \"unit\": \"C\"\n            },\n            {\n                \"place\": \"筲箕灣\",\n                \"value\": 27,\n                \"unit\": \"C\"\n            },\n            {\n                \"place\": \"九龍城\",\n                \"value\": 27,\n                \"unit\": \"C\"\n            },\n            {\n                \"place\": \"跑馬地\",\n                \"value\": 27,\n                \"unit\": \"C\"\n            },\n            {\n                \"place\": \"黃大仙\",\n                \"value\": 27,\n                \"unit\": \"C\"\n            },\n            {\n                \"place\": \"赤柱\",\n                \"value\": 27,\n                \"unit\": \"C\"\n            },\n            {\n                \"place\": \"觀塘\",\n                \"value\": 27,\n                \"unit\": \"C\"\n            },\n            {\n                \"place\": \"深水埗\",\n                \"value\": 27,\n                \"unit\": \"C\"\n            },\n            {\n                \"place\": \"啟德跑道公園\",\n                \"value\": 27,\n                \"unit\": \"C\"\n            },\n            {\n                \"place\": \"元朗公園\",\n                \"value\": 27,\n                \"unit\": \"C\"\n            },\n            {\n                \"place\": \"大美督\",\n                \"value\": 27,\n                \"unit\": \"C\"\n            }\n        ],\n        \"recordTime\": \"2021-05-08T22:00:00+08:00\"\n    },\n    \"tcmessage\": \"\",\n    \"mintempFrom00To09\": \"\",\n    \"rainfallFrom00To12\": \"\",\n    \"rainfallLastMonth\": \"\",\n    \"rainfallJanuaryToLastMonth\": \"\",\n    \"humidity\": {\n        \"recordTime\": \"2021-05-08T22:00:00+08:00\",\n        \"data\": [\n            {\n                \"unit\": \"percent\",\n                \"value\": 82,\n                \"place\": \"香港天文台\"\n            }\n        ]\n    }\n}"
+				}
+			]
+		},
+		{
+			"name": "CurrentWeatherReport_WithLangParamSc_ReturnScData",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Content-Type header is application/json\", () => {\r",
+							"  pm.expect(pm.response.headers.get('Content-Type')).to.contains('application/json');\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Body contains only sc data\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"东区\");\r",
+							"    pm.expect(pm.response.text()).not.include(\"東區\");\r",
+							"    pm.expect(pm.response.text()).not.include(\"Eastern District\");\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/weatherAPI/opendata/weather.php?dataType=rhrread&lang=sc",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"weatherAPI",
+						"opendata",
+						"weather.php"
+					],
+					"query": [
+						{
+							"key": "dataType",
+							"value": "rhrread",
+							"description": "(Required) Weather information data type"
+						},
+						{
+							"key": "lang",
+							"value": "sc",
+							"description": "Language of data content"
+						}
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Simplified Chinese Data Sample",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/weatherAPI/opendata/weather.php?dataType=rhrread&lang=sc",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"weatherAPI",
+								"opendata",
+								"weather.php"
+							],
+							"query": [
+								{
+									"key": "dataType",
+									"value": "rhrread",
+									"description": "(Required) Weather information data type"
+								},
+								{
+									"key": "lang",
+									"value": "sc",
+									"description": "Language of data content"
+								}
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Date",
+							"value": "Sun, 09 May 2021 07:55:07 GMT"
+						},
+						{
+							"key": "Server",
+							"value": "Apache"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Strict-Transport-Security",
+							"value": "max-age=63072000"
+						},
+						{
+							"key": "Referrer-Policy",
+							"value": "no-referrer-when-downgrade"
+						},
+						{
+							"key": "X-Frame-Options",
+							"value": "SAMEORIGIN"
+						},
+						{
+							"key": "X-Frame-Options",
+							"value": "SAMEORIGIN"
+						},
+						{
+							"key": "Content-Security-Policy",
+							"value": "default-src 'self'; frame-ancestors 'self' *;"
+						},
+						{
+							"key": "Content-Security-Policy",
+							"value": "frame-ancestors 'self' gowise2.weather.gov.hk gowise2.hko.ccgo.hksarg kids.weather.gov.hk *.weather.gov.hk;"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=10, max=100"
+						},
+						{
+							"key": "Connection",
+							"value": "Keep-Alive"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"rainfall\": {\n        \"data\": [\n            {\n                \"unit\": \"mm\",\n                \"place\": \"中西区\",\n                \"max\": 0,\n                \"main\": \"FALSE\"\n            },\n            {\n                \"unit\": \"mm\",\n                \"place\": \"东区\",\n                \"max\": 0,\n                \"main\": \"FALSE\"\n            },\n            {\n                \"unit\": \"mm\",\n                \"place\": \"葵青\",\n                \"max\": 0,\n                \"main\": \"FALSE\"\n            },\n            {\n                \"unit\": \"mm\",\n                \"place\": \"离岛区\",\n                \"max\": 0,\n                \"main\": \"FALSE\"\n            },\n            {\n                \"unit\": \"mm\",\n                \"place\": \"北区\",\n                \"max\": 0,\n                \"main\": \"FALSE\"\n            },\n            {\n                \"unit\": \"mm\",\n                \"place\": \"西贡\",\n                \"max\": 0,\n                \"main\": \"FALSE\"\n            },\n            {\n                \"unit\": \"mm\",\n                \"place\": \"沙田\",\n                \"max\": 0,\n                \"main\": \"FALSE\"\n            },\n            {\n                \"unit\": \"mm\",\n                \"place\": \"南区\",\n                \"max\": 0,\n                \"main\": \"FALSE\"\n            },\n            {\n                \"unit\": \"mm\",\n                \"place\": \"大埔\",\n                \"max\": 0,\n                \"main\": \"FALSE\"\n            },\n            {\n                \"unit\": \"mm\",\n                \"place\": \"荃湾\",\n                \"max\": 0,\n                \"main\": \"FALSE\"\n            },\n            {\n                \"unit\": \"mm\",\n                \"place\": \"屯门\",\n                \"max\": 0,\n                \"main\": \"FALSE\"\n            },\n            {\n                \"unit\": \"mm\",\n                \"place\": \"湾仔\",\n                \"max\": 0,\n                \"main\": \"FALSE\"\n            },\n            {\n                \"unit\": \"mm\",\n                \"place\": \"元朗\",\n                \"max\": 0,\n                \"main\": \"FALSE\"\n            },\n            {\n                \"unit\": \"mm\",\n                \"place\": \"油尖旺\",\n                \"max\": 0,\n                \"main\": \"FALSE\"\n            },\n            {\n                \"unit\": \"mm\",\n                \"place\": \"深水埗\",\n                \"max\": 0,\n                \"main\": \"\"\n            },\n            {\n                \"unit\": \"mm\",\n                \"place\": \"九龙城\",\n                \"max\": 0,\n                \"main\": \"\"\n            },\n            {\n                \"unit\": \"mm\",\n                \"place\": \"黄大仙\",\n                \"max\": 0,\n                \"main\": \"FALSE\"\n            },\n            {\n                \"unit\": \"mm\",\n                \"place\": \"观塘\",\n                \"max\": 0,\n                \"main\": \"FALSE\"\n            }\n        ],\n        \"startTime\": \"2021-05-09T13:45:00+08:00\",\n        \"endTime\": \"2021-05-09T14:45:00+08:00\"\n    },\n    \"warningMessage\": \"\",\n    \"icon\": [\n        51\n    ],\n    \"iconUpdateTime\": \"2021-05-09T11:45:00+08:00\",\n    \"specialWxTips\": [\n        \"天气炎热可能影响健康，市民应保持警惕，多补充水分。\"\n    ],\n    \"uvindex\": {\n        \"data\": [\n            {\n                \"place\": \"京士柏\",\n                \"value\": 8,\n                \"desc\": \"甚高\"\n            }\n        ],\n        \"recordDesc\": \"过去一小时\"\n    },\n    \"updateTime\": \"2021-05-09T15:02:00+08:00\",\n    \"temperature\": {\n        \"data\": [\n            {\n                \"place\": \"京士柏\",\n                \"value\": 31,\n                \"unit\": \"C\"\n            },\n            {\n                \"place\": \"香港天文台\",\n                \"value\": 31,\n                \"unit\": \"C\"\n            },\n            {\n                \"place\": \"黄竹坑\",\n                \"value\": 29,\n                \"unit\": \"C\"\n            },\n            {\n                \"place\": \"打鼓岭\",\n                \"value\": 33,\n                \"unit\": \"C\"\n            },\n            {\n                \"place\": \"流浮山\",\n                \"value\": 31,\n                \"unit\": \"C\"\n            },\n            {\n                \"place\": \"大埔\",\n                \"value\": 33,\n                \"unit\": \"C\"\n            },\n            {\n                \"place\": \"沙田\",\n                \"value\": 31,\n                \"unit\": \"C\"\n            },\n            {\n                \"place\": \"屯门\",\n                \"value\": 32,\n                \"unit\": \"C\"\n            },\n            {\n                \"place\": \"将军澳\",\n                \"value\": 31,\n                \"unit\": \"C\"\n            },\n            {\n                \"place\": \"西贡\",\n                \"value\": 30,\n                \"unit\": \"C\"\n            },\n            {\n                \"place\": \"长洲\",\n                \"value\": 34,\n                \"unit\": \"C\"\n            },\n            {\n                \"place\": \"赤鱲角\",\n                \"value\": 32,\n                \"unit\": \"C\"\n            },\n            {\n                \"place\": \"青衣\",\n                \"value\": 31,\n                \"unit\": \"C\"\n            },\n            {\n                \"place\": \"石岗\",\n                \"value\": 32,\n                \"unit\": \"C\"\n            },\n            {\n                \"place\": \"荃湾可观\",\n                \"value\": 28,\n                \"unit\": \"C\"\n            },\n            {\n                \"place\": \"荃湾城门谷\",\n                \"value\": 29,\n                \"unit\": \"C\"\n            },\n            {\n                \"place\": \"香港公园\",\n                \"value\": 29,\n                \"unit\": \"C\"\n            },\n            {\n                \"place\": \"筲箕湾\",\n                \"value\": 30,\n                \"unit\": \"C\"\n            },\n            {\n                \"place\": \"九龙城\",\n                \"value\": 32,\n                \"unit\": \"C\"\n            },\n            {\n                \"place\": \"跑马地\",\n                \"value\": 29,\n                \"unit\": \"C\"\n            },\n            {\n                \"place\": \"黄大仙\",\n                \"value\": 31,\n                \"unit\": \"C\"\n            },\n            {\n                \"place\": \"赤柱\",\n                \"value\": 29,\n                \"unit\": \"C\"\n            },\n            {\n                \"place\": \"观塘\",\n                \"value\": 31,\n                \"unit\": \"C\"\n            },\n            {\n                \"place\": \"深水埗\",\n                \"value\": 30,\n                \"unit\": \"C\"\n            },\n            {\n                \"place\": \"启德跑道公园\",\n                \"value\": 30,\n                \"unit\": \"C\"\n            },\n            {\n                \"place\": \"元朗公园\",\n                \"value\": 32,\n                \"unit\": \"C\"\n            },\n            {\n                \"place\": \"大美督\",\n                \"value\": 31,\n                \"unit\": \"C\"\n            }\n        ],\n        \"recordTime\": \"2021-05-09T15:00:00+08:00\"\n    },\n    \"tcmessage\": \"\",\n    \"mintempFrom00To09\": \"\",\n    \"rainfallFrom00To12\": \"\",\n    \"rainfallLastMonth\": \"\",\n    \"rainfallJanuaryToLastMonth\": \"\",\n    \"humidity\": {\n        \"recordTime\": \"2021-05-09T15:00:00+08:00\",\n        \"data\": [\n            {\n                \"unit\": \"percent\",\n                \"value\": 68,\n                \"place\": \"香港天文台\"\n            }\n        ]\n    }\n}"
+				}
+			]
+		},
+		{
+			"name": "CurrentWeatherReport_WithInvalidLangParamJp_ReturnErrorPage",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"pm.test(\"Body have multi lang error message\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"Please include valid parameters in API request\");\r",
+							"    pm.expect(pm.response.text()).to.include(\"請在應用程式介面請求中提供有效的參數\");\r",
+							"    pm.expect(pm.response.text()).to.include(\"请在应用程序编程接口请求中提供有效的参数\");\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/weatherAPI/opendata/weather.php?dataType=rhrread&lang=jp",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"weatherAPI",
+						"opendata",
+						"weather.php"
+					],
+					"query": [
+						{
+							"key": "dataType",
+							"value": "rhrread",
+							"description": "(Required) Weather information data type"
+						},
+						{
+							"key": "lang",
+							"value": "jp",
+							"description": "Language of data content"
+						}
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Error Page Sample",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/weatherAPI/opendata/weather.php",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"weatherAPI",
+								"opendata",
+								"weather.php"
+							],
+							"query": [
+								{
+									"key": "dataType",
+									"value": "rhrread",
+									"description": "(Required) Weather information data type",
+									"disabled": true
+								},
+								{
+									"key": "lang",
+									"value": "en",
+									"description": "Language of data content",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "html",
+					"header": [
+						{
+							"key": "Date",
+							"value": "Sat, 08 May 2021 14:13:30 GMT"
+						},
+						{
+							"key": "Server",
+							"value": "Apache"
+						},
+						{
+							"key": "Strict-Transport-Security",
+							"value": "max-age=31536000; includeSubDomains; preload"
+						},
+						{
+							"key": "Referrer-Policy",
+							"value": "no-referrer-when-downgrade"
+						},
+						{
+							"key": "X-Frame-Options",
+							"value": "SAMEORIGIN"
+						},
+						{
+							"key": "X-Frame-Options",
+							"value": "SAMEORIGIN"
+						},
+						{
+							"key": "Content-Security-Policy",
+							"value": "default-src 'self'; frame-ancestors 'self' *;"
+						},
+						{
+							"key": "Content-Security-Policy",
+							"value": "frame-ancestors 'self';"
+						},
+						{
+							"key": "Content-Length",
+							"value": "726"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=10, max=100"
+						},
+						{
+							"key": "Connection",
+							"value": "Keep-Alive"
+						},
+						{
+							"key": "Content-Type",
+							"value": "text/html; charset=utf-8"
+						}
+					],
+					"cookie": [],
+					"body": "Please include valid parameters in API request. For details, please refer to \n<a href=\"https://data.weather.gov.hk/weatherAPI/doc/HKO_Open_Data_API_Documentation.pdf\">Hong Kong Observatory Open Data API Documentation</a>.\n<br>\n<br>\r\n請在應用程式介面請求中提供有效的參數。有關詳情，請參閱\n<a href=\"https://data.weather.gov.hk/weatherAPI/doc/HKO_Open_Data_API_Documentation_tc.pdf\">香港天文台開放數據應用程式介面說明書</a>。\n<br>\n<br>\r\n请在应用程序编程接口请求中提供有效的参数。有关详情，请参阅\n<a href=\"https://data.weather.gov.hk/weatherAPI/doc/HKO_Open_Data_API_Documentation_sc.pdf\">香港天文台开放数据应用程序编程接口说明书</a>。"
+				}
+			]
+		},
+		{
+			"name": "CurrentWeatherReport_WithInvalidDataTypeParamAbc_ReturnErrorPage",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Body have multi lang error message\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"Please include valid parameters in API request\");\r",
+							"    pm.expect(pm.response.text()).to.include(\"請在應用程式介面請求中提供有效的參數\");\r",
+							"    pm.expect(pm.response.text()).to.include(\"请在应用程序编程接口请求中提供有效的参数\");\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/weatherAPI/opendata/weather.php?dataType=abc",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"weatherAPI",
+						"opendata",
+						"weather.php"
+					],
+					"query": [
+						{
+							"key": "dataType",
+							"value": "abc",
+							"description": "(Required) Weather information data type"
+						},
+						{
+							"key": "lang",
+							"value": "en",
+							"description": "Language of data content",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Error Page Sample",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/weatherAPI/opendata/weather.php",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"weatherAPI",
+								"opendata",
+								"weather.php"
+							],
+							"query": [
+								{
+									"key": "dataType",
+									"value": "rhrread",
+									"description": "(Required) Weather information data type",
+									"disabled": true
+								},
+								{
+									"key": "lang",
+									"value": "en",
+									"description": "Language of data content",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "html",
+					"header": [
+						{
+							"key": "Date",
+							"value": "Sat, 08 May 2021 14:13:30 GMT"
+						},
+						{
+							"key": "Server",
+							"value": "Apache"
+						},
+						{
+							"key": "Strict-Transport-Security",
+							"value": "max-age=31536000; includeSubDomains; preload"
+						},
+						{
+							"key": "Referrer-Policy",
+							"value": "no-referrer-when-downgrade"
+						},
+						{
+							"key": "X-Frame-Options",
+							"value": "SAMEORIGIN"
+						},
+						{
+							"key": "X-Frame-Options",
+							"value": "SAMEORIGIN"
+						},
+						{
+							"key": "Content-Security-Policy",
+							"value": "default-src 'self'; frame-ancestors 'self' *;"
+						},
+						{
+							"key": "Content-Security-Policy",
+							"value": "frame-ancestors 'self';"
+						},
+						{
+							"key": "Content-Length",
+							"value": "726"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=10, max=100"
+						},
+						{
+							"key": "Connection",
+							"value": "Keep-Alive"
+						},
+						{
+							"key": "Content-Type",
+							"value": "text/html; charset=utf-8"
+						}
+					],
+					"cookie": [],
+					"body": "Please include valid parameters in API request. For details, please refer to \n<a href=\"https://data.weather.gov.hk/weatherAPI/doc/HKO_Open_Data_API_Documentation.pdf\">Hong Kong Observatory Open Data API Documentation</a>.\n<br>\n<br>\r\n請在應用程式介面請求中提供有效的參數。有關詳情，請參閱\n<a href=\"https://data.weather.gov.hk/weatherAPI/doc/HKO_Open_Data_API_Documentation_tc.pdf\">香港天文台開放數據應用程式介面說明書</a>。\n<br>\n<br>\r\n请在应用程序编程接口请求中提供有效的参数。有关详情，请参阅\n<a href=\"https://data.weather.gov.hk/weatherAPI/doc/HKO_Open_Data_API_Documentation_sc.pdf\">香港天文台开放数据应用程序编程接口说明书</a>。"
+				}
+			]
+		},
+		{
+			"name": "CurrentWeatherReport_MissingParam_ReturnErrorPage",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Body have multi lang error message\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"Please include valid parameters in API request\");\r",
+							"    pm.expect(pm.response.text()).to.include(\"請在應用程式介面請求中提供有效的參數\");\r",
+							"    pm.expect(pm.response.text()).to.include(\"请在应用程序编程接口请求中提供有效的参数\");\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/weatherAPI/opendata/weather.php",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"weatherAPI",
+						"opendata",
+						"weather.php"
+					],
+					"query": [
+						{
+							"key": "dataType",
+							"value": "rhrread",
+							"description": "(Required) Weather information data type",
+							"disabled": true
+						},
+						{
+							"key": "lang",
+							"value": "en",
+							"description": "Language of data content",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Error Page Sample",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/weatherAPI/opendata/weather.php",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"weatherAPI",
+								"opendata",
+								"weather.php"
+							],
+							"query": [
+								{
+									"key": "dataType",
+									"value": "rhrread",
+									"description": "(Required) Weather information data type",
+									"disabled": true
+								},
+								{
+									"key": "lang",
+									"value": "en",
+									"description": "Language of data content",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "html",
+					"header": [
+						{
+							"key": "Date",
+							"value": "Sat, 08 May 2021 14:13:30 GMT"
+						},
+						{
+							"key": "Server",
+							"value": "Apache"
+						},
+						{
+							"key": "Strict-Transport-Security",
+							"value": "max-age=31536000; includeSubDomains; preload"
+						},
+						{
+							"key": "Referrer-Policy",
+							"value": "no-referrer-when-downgrade"
+						},
+						{
+							"key": "X-Frame-Options",
+							"value": "SAMEORIGIN"
+						},
+						{
+							"key": "X-Frame-Options",
+							"value": "SAMEORIGIN"
+						},
+						{
+							"key": "Content-Security-Policy",
+							"value": "default-src 'self'; frame-ancestors 'self' *;"
+						},
+						{
+							"key": "Content-Security-Policy",
+							"value": "frame-ancestors 'self';"
+						},
+						{
+							"key": "Content-Length",
+							"value": "726"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=10, max=100"
+						},
+						{
+							"key": "Connection",
+							"value": "Keep-Alive"
+						},
+						{
+							"key": "Content-Type",
+							"value": "text/html; charset=utf-8"
+						}
+					],
+					"cookie": [],
+					"body": "Please include valid parameters in API request. For details, please refer to \n<a href=\"https://data.weather.gov.hk/weatherAPI/doc/HKO_Open_Data_API_Documentation.pdf\">Hong Kong Observatory Open Data API Documentation</a>.\n<br>\n<br>\r\n請在應用程式介面請求中提供有效的參數。有關詳情，請參閱\n<a href=\"https://data.weather.gov.hk/weatherAPI/doc/HKO_Open_Data_API_Documentation_tc.pdf\">香港天文台開放數據應用程式介面說明書</a>。\n<br>\n<br>\r\n请在应用程序编程接口请求中提供有效的参数。有关详情，请参阅\n<a href=\"https://data.weather.gov.hk/weatherAPI/doc/HKO_Open_Data_API_Documentation_sc.pdf\">香港天文台开放数据应用程序编程接口说明书</a>。"
+				}
+			]
+		},
+		{
+			"name": "CurrentWeatherReport_WithValidParamAfterCalledWithInvalidParam_ReturnWeatherDataProperly",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Content-Type header is application/json\", () => {\r",
+							"  pm.expect(pm.response.headers.get('Content-Type')).to.contains('application/json');\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Body contains only en data\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"Eastern District\");\r",
+							"    pm.expect(pm.response.text()).not.include(\"東區\");\r",
+							"    pm.expect(pm.response.text()).not.include(\"东区\");\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/weatherAPI/opendata/weather.php?dataType=rhrread",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"weatherAPI",
+						"opendata",
+						"weather.php"
+					],
+					"query": [
+						{
+							"key": "dataType",
+							"value": "rhrread",
+							"description": "(Required) Weather information data type"
+						},
+						{
+							"key": "lang",
+							"value": "en",
+							"description": "Language of data content",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "English Data Sample",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/weatherAPI/opendata/weather.php?dataType=rhrread",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"weatherAPI",
+								"opendata",
+								"weather.php"
+							],
+							"query": [
+								{
+									"key": "dataType",
+									"value": "rhrread",
+									"description": "(Required) Weather information data type"
+								},
+								{
+									"key": "lang",
+									"value": "en",
+									"description": "Language of data content",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Date",
+							"value": "Sat, 08 May 2021 14:07:47 GMT"
+						},
+						{
+							"key": "Server",
+							"value": "Apache"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Strict-Transport-Security",
+							"value": "max-age=63072000"
+						},
+						{
+							"key": "Referrer-Policy",
+							"value": "no-referrer-when-downgrade"
+						},
+						{
+							"key": "X-Frame-Options",
+							"value": "SAMEORIGIN"
+						},
+						{
+							"key": "X-Frame-Options",
+							"value": "SAMEORIGIN"
+						},
+						{
+							"key": "Content-Security-Policy",
+							"value": "default-src 'self'; frame-ancestors 'self' *;"
+						},
+						{
+							"key": "Content-Security-Policy",
+							"value": "frame-ancestors 'self' gowise2.weather.gov.hk gowise2.hko.ccgo.hksarg kids.weather.gov.hk *.weather.gov.hk;"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=10, max=100"
+						},
+						{
+							"key": "Connection",
+							"value": "Keep-Alive"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"rainfall\": {\n        \"data\": [\n            {\n                \"unit\": \"mm\",\n                \"place\": \"Central &amp; Western District\",\n                \"max\": 0,\n                \"main\": \"FALSE\"\n            },\n            {\n                \"unit\": \"mm\",\n                \"place\": \"Eastern District\",\n                \"max\": 0,\n                \"main\": \"FALSE\"\n            },\n            {\n                \"unit\": \"mm\",\n                \"place\": \"Kwai Tsing\",\n                \"max\": 0,\n                \"main\": \"FALSE\"\n            },\n            {\n                \"unit\": \"mm\",\n                \"place\": \"Islands District\",\n                \"max\": 0,\n                \"main\": \"FALSE\"\n            },\n            {\n                \"unit\": \"mm\",\n                \"place\": \"North District\",\n                \"max\": 0,\n                \"main\": \"FALSE\"\n            },\n            {\n                \"unit\": \"mm\",\n                \"place\": \"Sai Kung\",\n                \"max\": 0,\n                \"main\": \"FALSE\"\n            },\n            {\n                \"unit\": \"mm\",\n                \"place\": \"Sha Tin\",\n                \"max\": 0,\n                \"main\": \"FALSE\"\n            },\n            {\n                \"unit\": \"mm\",\n                \"place\": \"Southern District\",\n                \"max\": 0,\n                \"main\": \"FALSE\"\n            },\n            {\n                \"unit\": \"mm\",\n                \"place\": \"Tai Po\",\n                \"max\": 0,\n                \"main\": \"FALSE\"\n            },\n            {\n                \"unit\": \"mm\",\n                \"place\": \"Tsuen Wan\",\n                \"max\": 0,\n                \"main\": \"FALSE\"\n            },\n            {\n                \"unit\": \"mm\",\n                \"place\": \"Tuen Mun\",\n                \"max\": 0,\n                \"main\": \"FALSE\"\n            },\n            {\n                \"unit\": \"mm\",\n                \"place\": \"Wan Chai\",\n                \"max\": 0,\n                \"main\": \"FALSE\"\n            },\n            {\n                \"unit\": \"mm\",\n                \"place\": \"Yuen Long\",\n                \"max\": 0,\n                \"main\": \"FALSE\"\n            },\n            {\n                \"unit\": \"mm\",\n                \"place\": \"Yau Tsim Mong\",\n                \"max\": 0,\n                \"main\": \"FALSE\"\n            },\n            {\n                \"unit\": \"mm\",\n                \"place\": \"Sham Shui Po\",\n                \"max\": 0,\n                \"main\": \"FALSE\"\n            },\n            {\n                \"unit\": \"mm\",\n                \"place\": \"Kowloon City\",\n                \"max\": 0,\n                \"main\": \"FALSE\"\n            },\n            {\n                \"unit\": \"mm\",\n                \"place\": \"Wong Tai Sin\",\n                \"max\": 0,\n                \"main\": \"FALSE\"\n            },\n            {\n                \"unit\": \"mm\",\n                \"place\": \"Kwun Tong\",\n                \"max\": 0,\n                \"main\": \"FALSE\"\n            }\n        ],\n        \"startTime\": \"2021-05-08T20:45:00+08:00\",\n        \"endTime\": \"2021-05-08T21:45:00+08:00\"\n    },\n    \"icon\": [\n        77\n    ],\n    \"iconUpdateTime\": \"2021-05-08T18:00:00+08:00\",\n    \"uvindex\": \"\",\n    \"updateTime\": \"2021-05-08T22:02:00+08:00\",\n    \"temperature\": {\n        \"data\": [\n            {\n                \"place\": \"King's Park\",\n                \"value\": 27,\n                \"unit\": \"C\"\n            },\n            {\n                \"place\": \"Hong Kong Observatory\",\n                \"value\": 28,\n                \"unit\": \"C\"\n            },\n            {\n                \"place\": \"Wong Chuk Hang\",\n                \"value\": 27,\n                \"unit\": \"C\"\n            },\n            {\n                \"place\": \"Ta Kwu Ling\",\n                \"value\": 26,\n                \"unit\": \"C\"\n            },\n            {\n                \"place\": \"Lau Fau Shan\",\n                \"value\": 27,\n                \"unit\": \"C\"\n            },\n            {\n                \"place\": \"Tai Po\",\n                \"value\": 27,\n                \"unit\": \"C\"\n            },\n            {\n                \"place\": \"Sha Tin\",\n                \"value\": 27,\n                \"unit\": \"C\"\n            },\n            {\n                \"place\": \"Tuen Mun\",\n                \"value\": 27,\n                \"unit\": \"C\"\n            },\n            {\n                \"place\": \"Tseung Kwan O\",\n                \"value\": 27,\n                \"unit\": \"C\"\n            },\n            {\n                \"place\": \"Sai Kung\",\n                \"value\": 27,\n                \"unit\": \"C\"\n            },\n            {\n                \"place\": \"Cheung Chau\",\n                \"value\": 26,\n                \"unit\": \"C\"\n            },\n            {\n                \"place\": \"Chek Lap Kok\",\n                \"value\": 28,\n                \"unit\": \"C\"\n            },\n            {\n                \"place\": \"Tsing Yi\",\n                \"value\": 27,\n                \"unit\": \"C\"\n            },\n            {\n                \"place\": \"Shek Kong\",\n                \"value\": 27,\n                \"unit\": \"C\"\n            },\n            {\n                \"place\": \"Tsuen Wan Ho Koon\",\n                \"value\": 26,\n                \"unit\": \"C\"\n            },\n            {\n                \"place\": \"Tsuen Wan Shing Mun Valley\",\n                \"value\": 27,\n                \"unit\": \"C\"\n            },\n            {\n                \"place\": \"Hong Kong Park\",\n                \"value\": 27,\n                \"unit\": \"C\"\n            },\n            {\n                \"place\": \"Shau Kei Wan\",\n                \"value\": 27,\n                \"unit\": \"C\"\n            },\n            {\n                \"place\": \"Kowloon City\",\n                \"value\": 27,\n                \"unit\": \"C\"\n            },\n            {\n                \"place\": \"Happy Valley\",\n                \"value\": 27,\n                \"unit\": \"C\"\n            },\n            {\n                \"place\": \"Wong Tai Sin\",\n                \"value\": 27,\n                \"unit\": \"C\"\n            },\n            {\n                \"place\": \"Stanley\",\n                \"value\": 27,\n                \"unit\": \"C\"\n            },\n            {\n                \"place\": \"Kwun Tong\",\n                \"value\": 27,\n                \"unit\": \"C\"\n            },\n            {\n                \"place\": \"Sham Shui Po\",\n                \"value\": 27,\n                \"unit\": \"C\"\n            },\n            {\n                \"place\": \"Kai Tak Runway Park\",\n                \"value\": 27,\n                \"unit\": \"C\"\n            },\n            {\n                \"place\": \"Yuen Long Park\",\n                \"value\": 27,\n                \"unit\": \"C\"\n            },\n            {\n                \"place\": \"Tai Mei Tuk\",\n                \"value\": 27,\n                \"unit\": \"C\"\n            }\n        ],\n        \"recordTime\": \"2021-05-08T22:00:00+08:00\"\n    },\n    \"warningMessage\": \"\",\n    \"mintempFrom00To09\": \"\",\n    \"rainfallFrom00To12\": \"\",\n    \"rainfallLastMonth\": \"\",\n    \"rainfallJanuaryToLastMonth\": \"\",\n    \"tcmessage\": \"\",\n    \"humidity\": {\n        \"recordTime\": \"2021-05-08T22:00:00+08:00\",\n        \"data\": [\n            {\n                \"unit\": \"percent\",\n                \"value\": 82,\n                \"place\": \"Hong Kong Observatory\"\n            }\n        ]\n    }\n}"
+				}
+			]
+		}
+	],
+	"variable": [
+		{
+			"key": "baseUrl",
+			"value": "https://data.weather.gov.hk",
+			"type": "string"
+		}
+	]
+}
